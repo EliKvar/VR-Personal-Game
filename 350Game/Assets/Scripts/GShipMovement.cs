@@ -14,6 +14,6 @@ public class GShipMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.RotateAround(Base.transform.position, Vector3.up, 10 * Time.deltaTime);
+        transform.RotateAround(Base.transform.position, Vector3.up, -6 * Time.deltaTime);
     }
 }

@@ -14,7 +14,7 @@ public class TitleScreen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("SetAsleep", 1f);
+       // Invoke("SetAsleep", 1f);
     }
      void SetAsleep()
      {
