@@ -8,6 +8,7 @@ TagManager:
   - Meteor
   - EnemySpawn
   - Den
+  - Target
   layers:
   - Default
   - TransparentFX
