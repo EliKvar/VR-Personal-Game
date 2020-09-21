@@ -5,19 +5,36 @@ using UnityEngine;
 public class RegEnemy : EnemyBase
 {
     UnityEngine.AI.NavMeshAgent agent;
-    
+    GameObject target;
+    BuildingController bc;
+    private int damage = 20;
 
-
-    // Start is called before the first frame update
     void Start()
     {
+        //Get initial target when spawned
         agent = this.GetComponent<UnityEngine.AI.NavMeshAgent>();
-        agent.SetDestination(GetTarget(this.transform.position));
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        target = GetTarget(this.transform.position);
+        agent.SetDestination(target.transform.position);
         
     }
+    
+    void Update()
+    {
+        //bc.HitBuilding(target, damage);
+        //Constantly check if target has been destroyed => if target had been destroyed => SetDestination(GetTarget())
+        if (!target)
+        {
+            target = GetTarget(this.transform.position);
+            agent.SetDestination(target.transform.position);
+        }
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //HERE
+        bc.HitBuilding()
+
+    }
+
 }

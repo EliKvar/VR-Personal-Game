@@ -22,22 +22,27 @@ public class EnemyBase : MonoBehaviour
     {
        
     }
+    
+    
     public virtual void SetTarget()
     {
+        
 
     }
 
-    public virtual Vector3 GetTarget(Vector3 enemy)
+    //Use calling enemies position => determine all gameobjects with target => find and return closest vector3
+    public virtual GameObject GetTarget(Vector3 enemy)
     {
         float minDist = Mathf.Infinity;
-        Vector3 temp = new Vector3();
+        //Vector3 temp = new Vector3();
+        GameObject temp = new GameObject();
         targets = GameObject.FindGameObjectsWithTag("Target");
         foreach (GameObject t in targets)
         {
            float dist =  Vector3.Distance(t.transform.position, enemy);
             if(dist < minDist)
             {
-                temp = t.transform.position;
+                temp = t;
                 minDist = dist;
             }
 
