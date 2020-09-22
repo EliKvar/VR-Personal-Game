@@ -6,8 +6,8 @@ public class RegEnemy : EnemyBase
 {
     UnityEngine.AI.NavMeshAgent agent;
     GameObject target;
-    BuildingController bc;
-    private int damage = 20;
+    BuildingController bc = new BuildingController();
+    public int damage = 1;
 
     void Start()
     {
@@ -20,7 +20,6 @@ public class RegEnemy : EnemyBase
     
     void Update()
     {
-        //bc.HitBuilding(target, damage);
         //Constantly check if target has been destroyed => if target had been destroyed => SetDestination(GetTarget())
         if (!target)
         {
@@ -29,12 +28,19 @@ public class RegEnemy : EnemyBase
         }
         
     }
-
     private void OnTriggerEnter(Collider other)
     {
-        //HERE
-        bc.HitBuilding()
-
+        //bc.SetPair();
     }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other)
+        {
+           
+            bc.HitBuilding(target, damage);
+        }
+    }
+    
+
 
 }
