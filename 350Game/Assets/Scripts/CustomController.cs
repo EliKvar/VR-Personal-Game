@@ -17,6 +17,7 @@ public class CustomController : MonoBehaviour
    public GameObject meteor;
     public GameObject angle;
     public GameObject target;
+    public GameObject gatlingPosition;
    // public GameObject players;
 
 
@@ -48,6 +49,7 @@ public class CustomController : MonoBehaviour
         isAdded = true;
         OVRManager.display.RecenterPose();
         rb = GetComponent<Rigidbody>();
+        
 
 
 
@@ -55,7 +57,6 @@ public class CustomController : MonoBehaviour
     void Update()
     {
         //====================================================================ADJUST values for desired movement.
-
         Vector2 primaryAxis = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
         Vector2 secondaryAxis = OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick);
         float primaryIndex = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger);

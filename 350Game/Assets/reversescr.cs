@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GShipMovement : MonoBehaviour
+public class reversescr : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject Base;
     void Start()
     {
         
@@ -14,6 +13,6 @@ public class GShipMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.RotateAround(Base.transform.position, Vector3.up, -.1f * Time.deltaTime);
+        
     }
 }

@@ -157,6 +157,7 @@ public class OVRPlayerController : MonoBehaviour
 		var p = CameraRig.transform.localPosition;
 		p.z = OVRManager.profile.eyeDepth;
 		CameraRig.transform.localPosition = p;
+		//Time.timeScale = .1f;
 	}
 
 	void Awake()
@@ -302,6 +303,7 @@ public class OVRPlayerController : MonoBehaviour
 
 		// Move contoller
 		Controller.Move(moveDirection);
+
 		Vector3 actualXZ = Vector3.Scale(Controller.transform.localPosition, new Vector3(1, 0, 1));
 
 		if (predictedXZ != actualXZ)
