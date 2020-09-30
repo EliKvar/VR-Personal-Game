@@ -18,24 +18,25 @@ public class Fence : MonoBehaviour
     private int regDMG = 50;
     private int tankDMG = 100;
     Animation anim;
-
+    ParticleSystem ps;
     private void Start()
     {
         anim = gameObject.GetComponent<Animation>();
+        ps = gameObject.GetComponentInChildren<ParticleSystem>();
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "RegEnemy")
         {
+            ps.Play();
             regCount++;
-            //Debug.Log(regCount);
         }
         else if (other.gameObject.tag == "TankEnemy")
         {
+            ps.Play();
             tankCount++;
         }
         isBeingHit = true;
-        //currentTime = Time.deltaTime;
     }
 
     private void OnTriggerExit(Collider other)
@@ -43,7 +44,6 @@ public class Fence : MonoBehaviour
         if (other.gameObject.tag == "RegEnemy")
         {
             regCount--;
-            UnityEngine.Debug.Log(regCount);
         }
         else if (other.gameObject.tag == "TankEnemy")
         {
@@ -55,13 +55,14 @@ public class Fence : MonoBehaviour
     private void Update()
     {
         if (regCount == 0 && tankCount == 0)
+        {
             isBeingHit = false;
+        }
+           
         if (health <= 0)
         {
             anim.Play();
-            if (!anim.isPlaying) {
-                Destroy(this.gameObject);
-            }//Play animation once, when done destroy
+            Destroy(this.gameObject, anim.clip.length);
 
         }
 
