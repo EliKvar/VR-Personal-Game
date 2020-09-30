@@ -9,6 +9,7 @@ TagManager:
   - EnemySpawn
   - Den
   - Target
+  - RegEnemy
   layers:
   - Default
   - TransparentFX

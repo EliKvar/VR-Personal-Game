@@ -15,6 +15,8 @@ public class BuildingController : MonoBehaviour
     public int fenceHealth;
     string determinedBuilding;
     public int pairValue;
+    public int health;
+    
 
     void Start()
     {
@@ -63,6 +65,7 @@ public class BuildingController : MonoBehaviour
         }
     }
     //Get incoming building GameObject and dmg int. Determine what type. Find equivalent GO in list. modify its value. if the value == 0, destroy GO.
+    /*
     public void HitBuilding(GameObject building, int dmg)
     {
        // Debug.Log(Fences[building.name]);
@@ -75,7 +78,7 @@ public class BuildingController : MonoBehaviour
             }
             else
             {
-                Debug.Log("NO GOOD");
+               // Debug.Log("NO GOOD");
             }
             //Debug.Log(Fences["fencepart (4)"]);
             //Fences[determinedBuilding] -= dmg;
@@ -94,7 +97,7 @@ public class BuildingController : MonoBehaviour
         
        
 
-    }
+    }*/
   
     
 }

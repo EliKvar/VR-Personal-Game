@@ -37,7 +37,7 @@ public class RegEnemy : EnemyBase
         if (other)
         {
            
-            bc.HitBuilding(target, damage);
+            //bc.HitBuilding(target, damage);
         }
     }
     
