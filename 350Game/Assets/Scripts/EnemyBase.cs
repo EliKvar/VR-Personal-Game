@@ -11,7 +11,7 @@ public class EnemyBase : MonoBehaviour
     //public float 
     public float maxSpeed;
     GameObject[] targets;
-    
+    GameObject temp;
 
     //do stuff with fields
     void Start()
@@ -34,8 +34,7 @@ public class EnemyBase : MonoBehaviour
     public virtual GameObject GetTarget(Vector3 enemy)
     {
         float minDist = Mathf.Infinity;
-        //Vector3 temp = new Vector3();
-        GameObject temp = new GameObject();
+        
         targets = GameObject.FindGameObjectsWithTag("Target");
         foreach (GameObject t in targets)
         {
@@ -48,6 +47,7 @@ public class EnemyBase : MonoBehaviour
 
         }
         return temp;
+    
 
     }
 

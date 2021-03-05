@@ -58,7 +58,7 @@ public class WatchTower : MonoBehaviour
     {
         if (regCount == 0 && tankCount == 0)
         {
-            // ps.Stop();
+            ps.Stop();
             isBeingHit = false;
         }
 

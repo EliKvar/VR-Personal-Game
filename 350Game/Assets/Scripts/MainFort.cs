@@ -55,7 +55,7 @@ public class MainFort : MonoBehaviour
     {
         if (regCount == 0 && tankCount == 0)
         {
-            // ps.Stop();
+            ps.Stop();
             isBeingHit = false;
         }
 
@@ -73,7 +73,7 @@ public class MainFort : MonoBehaviour
                 currentTime = Time.time + timeInterval;
                 health -= regDMG * regCount;
                 health -= tankDMG * tankCount;
-                UnityEngine.Debug.Log("Health: " + health + " Enemies: " + regCount + " " + tankCount + "timeInterval " + currentTime);
+               // UnityEngine.Debug.Log("Health: " + health + " Enemies: " + regCount + " " + tankCount + "timeInterval " + currentTime);
             }
         }
 

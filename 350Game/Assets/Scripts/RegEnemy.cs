@@ -5,7 +5,7 @@ using UnityEngine;
 public class RegEnemy : EnemyBase
 {
     UnityEngine.AI.NavMeshAgent agent;
-    GameObject target;
+    public GameObject target;
     BuildingController bc = new BuildingController();
     public int damage = 1;
 
@@ -20,6 +20,7 @@ public class RegEnemy : EnemyBase
     
     void Update()
     {
+        Debug.Log(target);
         //Constantly check if target has been destroyed => if target had been destroyed => SetDestination(GetTarget())
         if (!target)
         {
