@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class GunHandles : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public Transform target;
+    Rigidbody rb;
+
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();    
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        rb.MovePosition(target.transform.position);
     }
 }
