@@ -58,7 +58,7 @@ public class BuildingController : MonoBehaviour
             if (pair.Key == determinedBuilding)
             {
                 pairValue = pair.Value;
-                Debug.Log(pair.Key + " " + pairValue);
+                //Debug.Log(pair.Key + " " + pairValue);
                 // break;
 
             }

@@ -42,6 +42,11 @@ public class CustomController : MonoBehaviour
     private int fireDelay;
     private bool isHeld;
 
+    public OVRGrabbable lHandle;
+    public OVRGrabbable rHandle;
+    public GameObject gatlingGun;
+    GatlingGun gg;
+
     void Start()
     {
         myCamera = GetComponentInChildren<Camera>();
@@ -50,6 +55,7 @@ public class CustomController : MonoBehaviour
         OVRManager.display.RecenterPose();
         rb = GetComponent<Rigidbody>();
         
+
 
 
 
@@ -62,63 +68,33 @@ public class CustomController : MonoBehaviour
         float primaryIndex = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger);
         float secondaryIndex = OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger);
 
-        //if (OVRInput.Get(OVRInput.Button.PrimaryThumbstick) || OVRInput.Get(OVRInput.Button.DpadUp) || OVRInput.Get(OVRInput.Button.DpadDown) || OVRInput.Get(OVRInput.Button.DpadLeft) || OVRInput.Get(OVRInput.Button.DpadRight))
-        //{
-        //    camSpeed = fastSpeed;
-        //}
-        //else
-        //{
-        //    camSpeed = standardSpeed;
-        //}
-
-        // Dpad Movement
-        //if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickUp))
-        //{
-        //    Debug.Log(OVRInput.Button.PrimaryThumbstickUp);
-
-        //    rb.velocity = CenterEyeAnchor.transform.forward * camSpeed;  //CENTEREYEANCHOR could also be target
-        //}
-        //else if (OVRInput.GetUp(OVRInput.Button.PrimaryThumbstickUp) && (primaryAxis.y == 0.0f && secondaryAxis.x == 0.0f))
-        //{
-        //    //currentSpeed = Mathf.Lerp(, , Time.deltaTime);
-
-        //    rb.velocity = CenterEyeAnchor.transform.forward * 0.0f;
-        //    //Debug.Log(OVRInput.Button.PrimaryThumbstickUp);
-
-        //}
 
 
-        //if (OVRInput.Get(OVRInput.Button.DpadDown) || Input.GetKeyDown(KeyCode.S))
-        //{
-        //    rb.velocity = CenterEyeAnchor.transform.forward * camSpeed * -1;
-        //}
-        //else if (OVRInput.GetUp(OVRInput.Button.DpadDown) && (primaryAxis.y == 0.0f && secondaryAxis.x == 0.0f))
-        //{
-        //    rb.velocity = CenterEyeAnchor.transform.forward * 0.0f;
-        //}
+
+        if (lHandle.isGrabbed == false || rHandle.isGrabbed == false)
+        {
+            Debug.Log("Dropped");
+            gatlingGun.GetComponent<Animator>().Play("baseidlegat");
+        }
+
+        if (lHandle.isGrabbed && rHandle.isGrabbed && OVRInput.Get(OVRInput.Button.One) == false && OVRInput.Get(OVRInput.Button.Three) == false)
+        {
+            Debug.Log("Grabbed");
+            gatlingGun.GetComponent<Animator>().Play("idlegat");
+        }        
+
+        if(lHandle.isGrabbed && rHandle.isGrabbed && OVRInput.Get(OVRInput.Button.One) == true && OVRInput.Get(OVRInput.Button.Three))
+        {
+            Debug.Log("Firing");
+            gatlingGun.GetComponent<Animator>().Play("gatling2");
+            GatlingGun.instance.Fire();
+            //gg.Fire();
+        }
+        
 
 
-        //if (OVRInput.Get(OVRInput.Button.DpadRight))
-        //{
-        //    rb.velocity = CenterEyeAnchor.transform.right * camSpeed;
-        //}
-        //else if (OVRInput.GetUp(OVRInput.Button.DpadRight) && (primaryAxis.y == 0.0f && secondaryAxis.x == 0.0f))
-        //{
-        //    rb.velocity = CenterEyeAnchor.transform.right * 0.0f;
-        //}
 
 
-        //if (OVRInput.Get(OVRInput.Button.DpadLeft))
-        //{
-        //    rb.velocity = CenterEyeAnchor.transform.right * camSpeed * -1;
-        //}
-        //else if (OVRInput.GetUp(OVRInput.Button.DpadLeft) && (primaryAxis.y == 0.0f && secondaryAxis.x == 0.0f))
-        //{
-        //    rb.velocity = CenterEyeAnchor.transform.right * 0.0f;
-        //}
-
-        // primaryAxis.x != 0.0f ||
-        // Left Analog Stick Movement (Camera Face Movement)
         if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickUp) && isAdded == true)
         {
             isAdded = false;
@@ -128,15 +104,7 @@ public class CustomController : MonoBehaviour
 
             // rb.velocity = CenterEyeAnchor.transform.forward * camSpeed * primaryAxis.y;// + CenterEyeAnchor.transform.right * camSpeed * primaryAxis.x;
         }
-      //  if (primaryAxis.y != 0.0f)
-      //  {
-       //     isAdded = false;
-       //     camSpeed *= 1.5f;
-       //     Invoke("SetTrue", .2f);
-
-
-            // rb.velocity = CenterEyeAnchor.transform.forward * camSpeed * primaryAxis.y;// + CenterEyeAnchor.transform.right * camSpeed * primaryAxis.x;
-       // }
+     
         else if (primaryAxis.x == 0.0f && primaryAxis.y == 0.0f) //&& (OVRInput.Get(OVRInput.Button.DpadUp) == false && OVRInput.Get(OVRInput.Button.DpadDown) == false && OVRInput.Get(OVRInput.Button.DpadRight) == false && OVRInput.Get(OVRInput.Button.DpadLeft) == false) && rb.velocity.magnitude > 0)
         {
            // rb.velocity = CenterEyeAnchor.transform.forward * Mathf.Lerp(camSpeed, 0, Time.deltaTime);
@@ -144,14 +112,9 @@ public class CustomController : MonoBehaviour
             //camSpeed *= 0.99f;
 
         }
-        if (OVRInput.Get(OVRInput.Button.Three) && isAdded == true)
-        {
-           
-        }
-        // camSpeed= Mathf.Lerp(camSpeed, 0, Time.deltaTime);
+       
         rb.velocity = CenterEyeAnchor.transform.forward * camSpeed;// * primaryAxis.y;
         camSpeed *= 0.99f;
-       // Debug.Log(speed);
 
         // Right Analog Stick Player Rotation (This can cause player disorientation)
         if (secondaryAxis.x != 0.0f)
@@ -160,16 +123,7 @@ public class CustomController : MonoBehaviour
             rb.rotation = Quaternion.Euler(0, orientation, 0);
         }
 
-        // Triggers Vertical Movement (Game World Vertical Movement)
-        //if (primaryIndex != 0.0f || secondaryIndex != 0.0f)
-        //{
-        //    rb.velocity = transform.up * positionalSpeed * (secondaryIndex - primaryIndex);
-        //}
-
-        // playerPos = transform.position;
-        // playerDirection = transform.forward;
-        // playerRotation = transform.rotation;
-        //spawnPos = playerPos + playerDirection * spawnDistance;
+       
         if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger) && fireDelay > 10)
         {
             fireDelay = 0;
@@ -197,7 +151,6 @@ public class CustomController : MonoBehaviour
             isHeld = false;
         }
       
-     //   Debug.Log(fireDelay);
         fireDelay++;
 
 
