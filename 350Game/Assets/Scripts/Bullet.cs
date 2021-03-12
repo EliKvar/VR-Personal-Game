@@ -5,16 +5,15 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     float timeToLive = 3;
-    float time;
+    float time = 0;
    
 
     void Update()
     {
         time += Time.deltaTime;
-        Debug.Log(time);
         if(time >= timeToLive)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
         
     }

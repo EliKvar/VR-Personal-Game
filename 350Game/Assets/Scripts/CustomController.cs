@@ -46,6 +46,14 @@ public class CustomController : MonoBehaviour
     public OVRGrabbable rHandle;
     public GameObject gatlingGun;
     GatlingGun gg;
+    public SoftJointLimitSpring oldSpringTwist;
+    public SoftJointLimitSpring oldSpringSwing;
+    public SoftJointLimitSpring newSpringTwist;
+    public SoftJointLimitSpring newSpringSwing;
+    private bool haptic = false;
+
+
+
 
     void Start()
     {
@@ -54,9 +62,15 @@ public class CustomController : MonoBehaviour
         isAdded = true;
         OVRManager.display.RecenterPose();
         rb = GetComponent<Rigidbody>();
+
+        oldSpringTwist.spring = gatlingGun.GetComponent<CharacterJoint>().twistLimitSpring.spring;
+        oldSpringSwing.spring = gatlingGun.GetComponent<CharacterJoint>().swingLimitSpring.spring;
         
-
-
+        newSpringSwing = new SoftJointLimitSpring();
+        newSpringSwing.spring = 0.0f;
+        newSpringTwist = new SoftJointLimitSpring();
+        newSpringTwist.spring = 0.0f;
+        
 
 
     }
@@ -69,25 +83,41 @@ public class CustomController : MonoBehaviour
         float secondaryIndex = OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger);
 
 
-
+        
+        
 
         if (lHandle.isGrabbed == false || rHandle.isGrabbed == false)
         {
             Debug.Log("Dropped");
             gatlingGun.GetComponent<Animator>().Play("baseidlegat");
+
+           // gatlingGun.GetComponent<CharacterJoint>().swingLimitSpring = oldSpringSwing;
+           // gatlingGun.GetComponent<CharacterJoint>().twistLimitSpring = oldSpringTwist;
         }
 
         if (lHandle.isGrabbed && rHandle.isGrabbed && OVRInput.Get(OVRInput.Button.One) == false && OVRInput.Get(OVRInput.Button.Three) == false)
         {
             Debug.Log("Grabbed");
             gatlingGun.GetComponent<Animator>().Play("idlegat");
-        }        
+            // gatlingGun.GetComponent<CharacterJoint>().swingLimitSpring = newSpringSwing;
+            // gatlingGun.GetComponent<CharacterJoint>().twistLimitSpring = newSpringTwist;
+            OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.LTouch);
+            OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
 
-        if(lHandle.isGrabbed && rHandle.isGrabbed && OVRInput.Get(OVRInput.Button.One) == true && OVRInput.Get(OVRInput.Button.Three))
+        }
+
+        if (lHandle.isGrabbed && rHandle.isGrabbed && OVRInput.Get(OVRInput.Button.One) == true && OVRInput.Get(OVRInput.Button.Three))
         {
+             
             Debug.Log("Firing");
             gatlingGun.GetComponent<Animator>().Play("gatling2");
             GatlingGun.instance.Fire();
+            //FOLLOW VIDEO FOR OVRHAPTICSCLIPS
+            //OVRInput.SetControllerVibration(.3f, 0.5f, OVRInput.Controller.RTouch);
+            //OVRInput.SetControllerVibration(.3f, 0.5f, OVRInput.Controller.LTouch);
+
+
+
             //gg.Fire();
         }
         
