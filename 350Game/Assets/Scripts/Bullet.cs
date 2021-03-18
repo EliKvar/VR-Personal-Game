@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     float timeToLive = 3;
     float time = 0;
+    public GameObject impactEffect;
    
 
     void Update()
@@ -16,5 +17,10 @@ public class Bullet : MonoBehaviour
             Destroy(this.gameObject);
         }
         
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        //Debug.Log(collision.gameObject.name);
+        //Instantiate(impactEffect, collision.gameObject.transform);
     }
 }

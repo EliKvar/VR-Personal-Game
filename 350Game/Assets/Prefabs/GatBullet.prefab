@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 5450041996273307142}
   m_Layer: 0
   m_Name: GatBullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2483d21839ebd544bb10e26edd56040e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  impactEffect: {fileID: 100010, guid: 031d08f52af1daa4f929b85221519426, type: 3}
 --- !u!198 &5331910499422530688
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4862,7 +4863,7 @@ GameObject:
   - component: {fileID: 657829127342497707}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

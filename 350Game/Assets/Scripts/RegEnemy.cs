@@ -8,6 +8,8 @@ public class RegEnemy : EnemyBase
     public GameObject target;
     BuildingController bc = new BuildingController();
     public int damage = 1;
+    private int health = 500;
+    public GameObject bloodSplatter;
 
     void Start()
     {
@@ -27,11 +29,20 @@ public class RegEnemy : EnemyBase
             target = GetTarget(this.transform.position);
             agent.SetDestination(target.transform.position);
         }
+        if(health <= 0)
+        {
+            Destroy(this.gameObject);
+        }
         
     }
     private void OnTriggerEnter(Collider other)
     {
-        //bc.SetPair();
+        if(other.gameObject.tag == "Bullet")
+        {
+            Instantiate(bloodSplatter, other.transform.position, other.transform.rotation);
+            Debug.Log(this.gameObject.name + "got hit.");
+            health -= 50;
+        }
     }
     private void OnTriggerStay(Collider other)
     {

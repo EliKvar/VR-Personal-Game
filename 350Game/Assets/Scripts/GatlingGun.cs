@@ -5,9 +5,10 @@ using UnityEngine;
 public class GatlingGun : MonoBehaviour
 {
     float coneSize = 2;
-    float shootForce = 15000;
+    float shootForce = 20000;
     public GameObject bulletPrefab;
     public GameObject firePoint;
+    public GameObject fireEffect;
     public static GatlingGun instance;
 
     private void Awake()
@@ -24,7 +25,7 @@ public class GatlingGun : MonoBehaviour
     public void Fire()
     {
         var bullet = Instantiate(bulletPrefab, firePoint.transform.position, firePoint.transform.rotation);
-
+        Instantiate(fireEffect, firePoint.transform.position, firePoint.transform.rotation);
         float width = Random.Range(-1f, 1f) * coneSize;
         float height = Random.Range(-1f, 1f) * coneSize;
 

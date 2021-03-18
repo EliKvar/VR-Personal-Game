@@ -58,7 +58,7 @@ public class CustomController : MonoBehaviour
     void Start()
     {
         myCamera = GetComponentInChildren<Camera>();
-        isSlowed = false;
+        //isSlowed = true;
         isAdded = true;
         OVRManager.display.RecenterPose();
         rb = GetComponent<Rigidbody>();
@@ -82,7 +82,10 @@ public class CustomController : MonoBehaviour
         float primaryIndex = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger);
         float secondaryIndex = OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger);
 
-
+        if(isSlowed == true)
+        {
+            Time.timeScale = 0.1f;
+        }
         
         
 

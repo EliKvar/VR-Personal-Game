@@ -10,6 +10,8 @@ TagManager:
   - Den
   - Target
   - RegEnemy
+  - Bullet
+  - Fire
   layers:
   - Default
   - TransparentFX
@@ -26,7 +28,7 @@ TagManager:
   - EnemySpawn
   - Teleportable
   - Handle
-  - 
+  - Bullet
   - 
   - 
   - 
