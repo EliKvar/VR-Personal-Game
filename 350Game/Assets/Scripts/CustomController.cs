@@ -76,11 +76,8 @@ public class CustomController : MonoBehaviour
     }
     void Update()
     {
-        //====================================================================ADJUST values for desired movement.
         Vector2 primaryAxis = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
         Vector2 secondaryAxis = OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick);
-        float primaryIndex = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger);
-        float secondaryIndex = OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger);
 
         if(isSlowed == true)
         {
@@ -93,17 +90,12 @@ public class CustomController : MonoBehaviour
         {
             Debug.Log("Dropped");
             gatlingGun.GetComponent<Animator>().Play("baseidlegat");
-
-           // gatlingGun.GetComponent<CharacterJoint>().swingLimitSpring = oldSpringSwing;
-           // gatlingGun.GetComponent<CharacterJoint>().twistLimitSpring = oldSpringTwist;
         }
 
         if (lHandle.isGrabbed && rHandle.isGrabbed && OVRInput.Get(OVRInput.Button.One) == false && OVRInput.Get(OVRInput.Button.Three) == false)
         {
             Debug.Log("Grabbed");
             gatlingGun.GetComponent<Animator>().Play("idlegat");
-            // gatlingGun.GetComponent<CharacterJoint>().swingLimitSpring = newSpringSwing;
-            // gatlingGun.GetComponent<CharacterJoint>().twistLimitSpring = newSpringTwist;
             OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.LTouch);
             OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
 
@@ -118,36 +110,8 @@ public class CustomController : MonoBehaviour
             //FOLLOW VIDEO FOR OVRHAPTICSCLIPS
             //OVRInput.SetControllerVibration(.3f, 0.5f, OVRInput.Controller.RTouch);
             //OVRInput.SetControllerVibration(.3f, 0.5f, OVRInput.Controller.LTouch);
-
-
-
-            //gg.Fire();
         }
         
-
-
-
-
-        if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickUp) && isAdded == true)
-        {
-            isAdded = false;
-            camSpeed += 5.2f;
-            Invoke("SetTrue", .2f); //May not need this if the camslowdown number is balanced well with the camspeedup
-
-
-            // rb.velocity = CenterEyeAnchor.transform.forward * camSpeed * primaryAxis.y;// + CenterEyeAnchor.transform.right * camSpeed * primaryAxis.x;
-        }
-     
-        else if (primaryAxis.x == 0.0f && primaryAxis.y == 0.0f) //&& (OVRInput.Get(OVRInput.Button.DpadUp) == false && OVRInput.Get(OVRInput.Button.DpadDown) == false && OVRInput.Get(OVRInput.Button.DpadRight) == false && OVRInput.Get(OVRInput.Button.DpadLeft) == false) && rb.velocity.magnitude > 0)
-        {
-           // rb.velocity = CenterEyeAnchor.transform.forward * Mathf.Lerp(camSpeed, 0, Time.deltaTime);
-            rb.velocity = rb.velocity * camSpeed * Time.deltaTime;
-            //camSpeed *= 0.99f;
-
-        }
-       
-        rb.velocity = CenterEyeAnchor.transform.forward * camSpeed;// * primaryAxis.y;
-        camSpeed *= 0.99f;
 
         // Right Analog Stick Player Rotation (This can cause player disorientation)
         if (secondaryAxis.x != 0.0f)
@@ -155,37 +119,6 @@ public class CustomController : MonoBehaviour
             orientation = orientation + rotationSpeed * secondaryAxis.x * Time.deltaTime;
             rb.rotation = Quaternion.Euler(0, orientation, 0);
         }
-
-       
-        if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger) && fireDelay > 10)
-        {
-            fireDelay = 0;
-
-            isHeld = true;
-            Vector3 camScreen = new Vector3(0.5f, 0.5f, 0f); // center of the screen
-            float rayLength = Mathf.Infinity;
-            Ray ray = myCamera.ViewportPointToRay(camScreen);
-            Debug.DrawRay(ray.origin, ray.direction * rayLength, Color.red);
-
-            Physics.Raycast(ray, out hitInfo);
-
-
-            GameObject met = Instantiate(meteor) as GameObject;
-            met.transform.position = transform.position + angle.transform.forward * .01f;
-            Rigidbody rbMet = met.GetComponent<Rigidbody>();
-            met.transform.LookAt(target.transform);
-            rbMet.velocity = rb.velocity;
-
-            rbMet.AddForce((target.transform.position - angle.transform.position) * speed);
-            Destroy(met, 9f);
-        }
-        else
-        {
-            isHeld = false;
-        }
-      
-        fireDelay++;
-
 
     }
     void SetTrue()

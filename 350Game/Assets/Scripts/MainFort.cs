@@ -42,14 +42,18 @@ public class MainFort : MonoBehaviour
         if (other.gameObject.tag == "RegEnemy")
         {
             regCount--;
-            UnityEngine.Debug.Log(regCount);
+            //UnityEngine.Debug.Log(regCount);
         }
         else if (other.gameObject.tag == "TankEnemy")
         {
             tankCount--;
         }
     }
-
+    void GameEnd()
+    {
+        Debug.Log("GameEnd");
+        GameManager.Instance.OnGameLose();
+    }
 
     private void Update()
     {
@@ -62,7 +66,10 @@ public class MainFort : MonoBehaviour
         if (health <= 0)
         {
             anim.Play();
-            Destroy(this.gameObject, anim.clip.length);
+            Invoke("GameEnd", anim.clip.length);
+            Destroy(transform.parent.gameObject, anim.clip.length);
+            
+            Debug.Log("Destroy");
 
         }
 

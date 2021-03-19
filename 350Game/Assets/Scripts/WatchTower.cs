@@ -45,7 +45,7 @@ public class WatchTower : MonoBehaviour
         if (other.gameObject.tag == "RegEnemy")
         {
             regCount--;
-            UnityEngine.Debug.Log(regCount);
+            //UnityEngine.Debug.Log(regCount);
         }
         else if (other.gameObject.tag == "TankEnemy")
         {

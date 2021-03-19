@@ -8,17 +8,16 @@ public class WaveSpawner : MonoBehaviour
     private int spawnInterval;
     private int maxEnemies;
     private int numEnemies;
-   // private string easy;
-    //private string medium;
-    //private string hard;
     private string difficulty;
     private bool waveSpawn = true;
     private int waveNumber = 0;
-    public GameObject ShieldEnemy;
-    public GameObject SwordEnemy;
+    public GameObject regEnemy;
+    public GameObject tankEnemy;
     private int enemyProgression;
     public List<GameObject> enemies = new List<GameObject>();
     public static WaveSpawner Instance;
+
+    public GameObject spawnPoint;
 
     public void SetDifficulty(string diff)
     {
@@ -52,10 +51,7 @@ public class WaveSpawner : MonoBehaviour
     void Start()
     {
         Instance = this;
-
         numEnemies = 0;
-        //difficulty = "Medium";
-       
         gameTime = 0;
     }
     
@@ -68,7 +64,7 @@ public class WaveSpawner : MonoBehaviour
                 numEnemies++;
                 gameTime += spawnInterval;
                 // Instantiate(ShieldEnemy, randomSpawn);
-                Instantiate(ShieldEnemy, Random.insideUnitSphere * 5 + gameObject.transform.position, Random.rotation);
+                Instantiate(regEnemy, spawnPoint.transform.position, Quaternion.identity);
          
 
             }

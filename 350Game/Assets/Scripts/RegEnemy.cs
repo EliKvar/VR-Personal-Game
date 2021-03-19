@@ -22,7 +22,7 @@ public class RegEnemy : EnemyBase
     
     void Update()
     {
-        Debug.Log(target);
+        //Debug.Log(target);
         //Constantly check if target has been destroyed => if target had been destroyed => SetDestination(GetTarget())
         if (!target)
         {
@@ -31,6 +31,7 @@ public class RegEnemy : EnemyBase
         }
         if(health <= 0)
         {
+            GameManager.Instance.AddKill();
             Destroy(this.gameObject);
         }
         
@@ -40,7 +41,7 @@ public class RegEnemy : EnemyBase
         if(other.gameObject.tag == "Bullet")
         {
             Instantiate(bloodSplatter, other.transform.position, other.transform.rotation);
-            Debug.Log(this.gameObject.name + "got hit.");
+            //Debug.Log(this.gameObject.name + "got hit.");
             health -= 50;
         }
     }

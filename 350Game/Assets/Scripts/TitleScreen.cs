@@ -9,52 +9,40 @@ public class TitleScreen : MonoBehaviour
     public GameObject mediumButton;
     public GameObject hardButton;
     public GameObject canvasD;
+    public GameObject platform;
+    public GameObject canvasE;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-       // Invoke("SetAsleep", 1f);
-    }
-     void SetAsleep()
-     {
-        Time.timeScale = 0;
-       // HardButton();
-
-     }
-
-
-// Update is called once per frame
 public void EasyButton()
     {
-        WaveSpawner.Instance.SetDifficulty("Easy");
         Time.timeScale = 1;
-
-        easyButton.SetActive(false);
-        hardButton.SetActive(false);
-        mediumButton.SetActive(false);
-        canvasD.SetActive(false);
+        DestroyStart();
+        WaveSpawner.Instance.SetDifficulty("Easy");
+        GameManager.Instance.StartGame();
+        
     }
     public void MediumButton()
     {
-        WaveSpawner.Instance.SetDifficulty("Medium");
         Time.timeScale = 1;
+        DestroyStart();
+        WaveSpawner.Instance.SetDifficulty("Medium");
+        GameManager.Instance.StartGame();
 
-
-        easyButton.SetActive(false);
-        hardButton.SetActive(false);
-        mediumButton.SetActive(false);
-        canvasD.SetActive(false);
     }
     public void HardButton()
     {
         Time.timeScale = 1;
-
+        DestroyStart();
+        GameManager.Instance.StartGame();
         WaveSpawner.Instance.SetDifficulty("Hard");
 
+    }
+    public void DestroyStart()
+    {
         easyButton.SetActive(false);
         hardButton.SetActive(false);
         mediumButton.SetActive(false);
         canvasD.SetActive(false);
+        platform.SetActive(false);
+        canvasE.SetActive(false);
     }
 }

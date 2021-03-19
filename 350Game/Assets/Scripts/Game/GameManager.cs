@@ -9,18 +9,16 @@ using System.Runtime.Serialization.Formatters.Binary;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public int maxAllowedEscapedEnemies = 10;
-    public int escapedEnemies;
-    public bool gameOver;
     private int kills;
-    private int lives;
-  // private string test = UIManager.Instance.lives.text;
-    //private string test2 = UIManager.Instance.kills.text;
-    
+    public GameObject easyButton;
+    public GameObject mediumButton;
+    public GameObject hardButton;
+    public GameObject canvasD;
 
     void Awake()
     {
         Instance = this;
+        Time.timeScale = 1;
        // Invoke("SetAsleep", 3f);     //Comment this out, comment setasleep func out
                                      //Test in vr, turn in
     }
@@ -35,44 +33,34 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public int GetNumOfLives()
-    {
-        lives = maxAllowedEscapedEnemies - escapedEnemies;
-        return lives;
-    }
     public int GetNumOfKills()
     {
         return kills;
-    }
-    public void OnEnemyEscape()
-    {
-        escapedEnemies++;
-        Debug.Log("Escaped" + escapedEnemies);
-
-        if (escapedEnemies == maxAllowedEscapedEnemies)
-        {
-            OnGameLose();
-        }
     }
 
     public void AddKill()
     {
         kills++;
-
     }
 
-    private void OnGameLose()
+    public void OnGameLose()
     {
-        gameOver = true;
-
-            Time.timeScale = 0;
-        
-
+        Time.timeScale = 0;
         UIManager.Instance.ShowLoseScreen();
+    }
+    public void LoadDifficulties()
+    {
+        this.gameObject.SetActive(false);
+        canvasD.SetActive(true);
+        easyButton.SetActive(true);
+        mediumButton.SetActive(true);
+        hardButton.SetActive(true);
     }
     public void StartGame()
     {
-        SceneManager.LoadScene("Main");
+        VRPlayerManager.Instance.SetInPlane();
+        Time.timeScale = 1;
+        //SceneManager.LoadScene("Main");
     }
     
     public void Quit()
@@ -89,11 +77,7 @@ public class GameManager : MonoBehaviour
     private Save CreateSaveGameObject()
     {
         Save save = new Save();
-        save.lives = GetNumOfLives();
         save.kills = GetNumOfKills();
-
-       
-
         return save;
     }
     public void SaveGame()
@@ -123,7 +107,7 @@ public class GameManager : MonoBehaviour
             FileStream file = File.Open(Application.persistentDataPath + "/gamesave.save", FileMode.Open);
             Save save = (Save)bf.Deserialize(file);
             file.Close();
-            SetGameData( save.kills, save.lives);
+            SetGameData( save.kills);
 
             Debug.Log("Game Loaded");
 
@@ -133,11 +117,10 @@ public class GameManager : MonoBehaviour
             Debug.Log("No game saved!");
         }
     }
-    public void SetGameData(int k, int l)
+    public void SetGameData(int k)
     {
-        Debug.Log("Kills: " + k + " Lives: " +l );
+        Debug.Log("Kills: " + k);
         kills = k;
-        lives = l;
         //UIManager.Instance.SetKLText(l, k);
        // UIManager.Instance.lives.text = lives.ToString(); //SHOULD WORK, BUT DOESNT
         //UIManager.Instance.kills.text = kills.ToString();

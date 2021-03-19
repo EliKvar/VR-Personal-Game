@@ -42,7 +42,6 @@ public class EnemyShield : EnemyBase
         if (collision.gameObject.tag == "Den")
         {
             Destroy(gameObject);
-            GameManager.Instance.OnEnemyEscape();
             GameManager.Instance.SaveGame();  
             UIManager.Instance.UpdateLives();
        
