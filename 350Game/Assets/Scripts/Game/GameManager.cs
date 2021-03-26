@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        Time.timeScale = 1;
+        Time.timeScale = 0;
        // Invoke("SetAsleep", 3f);     //Comment this out, comment setasleep func out
                                      //Test in vr, turn in
     }

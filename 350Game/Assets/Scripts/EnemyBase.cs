@@ -13,23 +13,6 @@ public class EnemyBase : MonoBehaviour
     GameObject[] targets;
     GameObject temp;
 
-    //do stuff with fields
-    void Start()
-    {
-    }
-
-    void FixedUpdate()
-    {
-       
-    }
-    
-    
-    public virtual void SetTarget()
-    {
-        
-
-    }
-
     //Use calling enemies position => determine all gameobjects with target => find and return closest vector3
     public virtual GameObject GetTarget(Vector3 enemy)
     {
@@ -47,13 +30,5 @@ public class EnemyBase : MonoBehaviour
 
         }
         return temp;
-    
-
     }
-
-    
-
- 
-   
-
 }

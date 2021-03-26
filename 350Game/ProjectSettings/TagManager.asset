@@ -12,6 +12,7 @@ TagManager:
   - RegEnemy
   - Bullet
   - Fire
+  - TankEnemy
   layers:
   - Default
   - TransparentFX

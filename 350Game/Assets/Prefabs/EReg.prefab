@@ -141,7 +141,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 0
   target: {fileID: 0}
-  damage: 20
   bloodSplatter: {fileID: 100010, guid: 5ff3962ad4e51a846afc85a2052ea8a8, type: 3}
 --- !u!195 &8045327632671178921
 NavMeshAgent:
@@ -332,7 +331,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: caa72d5aff9b84502ad37484407ceca2, type: 2}
+  - {fileID: 2100000, guid: 24a23da8e52fb5045becc6fb15116fbb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -653,7 +652,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: caa72d5aff9b84502ad37484407ceca2, type: 2}
+  - {fileID: 2100000, guid: 46942e7ff881c4d4ca139892f7a02acc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -746,7 +745,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: caa72d5aff9b84502ad37484407ceca2, type: 2}
+  - {fileID: 2100000, guid: 46942e7ff881c4d4ca139892f7a02acc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -839,7 +838,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: caa72d5aff9b84502ad37484407ceca2, type: 2}
+  - {fileID: 2100000, guid: 24a23da8e52fb5045becc6fb15116fbb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -932,7 +931,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 87878a96d53344af1875eec2206275da, type: 2}
+  - {fileID: 2100000, guid: b7f70d23ebeb07948a56eb18dfd48cfb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

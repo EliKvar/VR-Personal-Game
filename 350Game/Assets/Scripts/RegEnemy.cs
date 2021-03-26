@@ -6,8 +6,6 @@ public class RegEnemy : EnemyBase
 {
     UnityEngine.AI.NavMeshAgent agent;
     public GameObject target;
-    BuildingController bc = new BuildingController();
-    public int damage = 1;
     private int health = 500;
     public GameObject bloodSplatter;
 
@@ -45,15 +43,5 @@ public class RegEnemy : EnemyBase
             health -= 50;
         }
     }
-    private void OnTriggerStay(Collider other)
-    {
-        if (other)
-        {
-           
-            //bc.HitBuilding(target, damage);
-        }
-    }
-    
-
 
 }

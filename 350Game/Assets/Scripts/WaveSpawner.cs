@@ -6,18 +6,21 @@ public class WaveSpawner : MonoBehaviour
 {
     private float gameTime = 0f;
     private int spawnInterval;
-    private int maxEnemies;
-    private int numEnemies;
+    private int maxRegular;
+    private int numRegular;
+    private int maxTank;
+    private int numTanks;
     private string difficulty;
     private bool waveSpawn = true;
     private int waveNumber = 0;
     public GameObject regEnemy;
     public GameObject tankEnemy;
-    private int enemyProgression;
+    private int regProgression;
+    private int tankProgression;
     public List<GameObject> enemies = new List<GameObject>();
     public static WaveSpawner Instance;
 
-    public GameObject spawnPoint;
+    public GameObject[] spawnPoint;
 
     public void SetDifficulty(string diff)
     {
@@ -26,23 +29,29 @@ public class WaveSpawner : MonoBehaviour
         {
             case "Easy":
                 spawnInterval = 5;
-                maxEnemies = 3;
-                enemyProgression = 1;
+                maxRegular = 4;
+                maxTank = 1;
+                tankProgression = 1;
+                regProgression = 2;
                 Debug.Log("Easy");
                 break;
 
             case "Medium":
                 spawnInterval = 3;
-                maxEnemies = 7;
-                enemyProgression = 2;
+                maxRegular = 7;
+                maxTank = 3;
+                tankProgression = 2;
+                regProgression = 3;
                 Debug.Log("Medium");
 
                 break;
 
             case "Hard":
                 spawnInterval = 1;
-                maxEnemies = 10;
-                enemyProgression = 5;
+                maxRegular = 10;
+                maxTank = 4;
+                tankProgression = 3;
+                regProgression = 5;
                 Debug.Log("Hard");
 
                 break;
@@ -51,29 +60,35 @@ public class WaveSpawner : MonoBehaviour
     void Start()
     {
         Instance = this;
-        numEnemies = 0;
+        numRegular = 0;
+        numTanks = 0;
         gameTime = 0;
     }
     
-    // Update is called once per frame
     void Update()
     {
         
-            if (Time.time > gameTime && numEnemies != maxEnemies)
+            if (Time.time > gameTime && numRegular != maxRegular)
             {
-                numEnemies++;
+                numRegular++;
                 gameTime += spawnInterval;
-                // Instantiate(ShieldEnemy, randomSpawn);
-                Instantiate(regEnemy, spawnPoint.transform.position, Quaternion.identity);
-         
+            
+                Instantiate(regEnemy, spawnPoint[(int)Random.Range(0.0f, spawnPoint.Length)].transform.position, Quaternion.identity);
 
-            }
-        if (numEnemies == maxEnemies && GameObject.FindGameObjectsWithTag("Enemy").Length == 0) /*&& gameTime > (gameTime += 20)*/
+                if(numTanks != maxTank)
+                {
+                    Instantiate(tankEnemy, spawnPoint[(int)Random.Range(0.0f, spawnPoint.Length)].transform.position, Quaternion.identity);
+                    numTanks++;
+                }
+        }
+        if (numRegular == maxRegular && numTanks == maxTank && GameObject.FindGameObjectsWithTag("RegEnemy").Length == 0 && GameObject.FindGameObjectsWithTag("TankEnemy").Length == 0) /*&& gameTime > (gameTime += 20)*/
         {
             Debug.Log("Ticked");
 
-            numEnemies = 0;
-            maxEnemies += enemyProgression;
+            numRegular = 0;
+            numTanks = 0;
+            maxTank += tankProgression;
+            maxRegular += regProgression;
             gameTime = Time.time + 6;
         }
         
