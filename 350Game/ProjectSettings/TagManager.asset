@@ -13,6 +13,7 @@ TagManager:
   - Bullet
   - Fire
   - TankEnemy
+  - Mesh
   layers:
   - Default
   - TransparentFX
@@ -30,7 +31,7 @@ TagManager:
   - Teleportable
   - Handle
   - Bullet
-  - 
+  - Mesh
   - 
   - 
   - 

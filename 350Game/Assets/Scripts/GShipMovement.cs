@@ -1,19 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GShipMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
     public GameObject Base;
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //transform.RotateAround(Base.transform.position, Vector3.up, -1f * Time.deltaTime);
+        transform.RotateAround(Base.transform.position, Vector3.up, 2f * Time.deltaTime);
     }
 }

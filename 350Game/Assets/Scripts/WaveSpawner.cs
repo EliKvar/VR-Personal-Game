@@ -19,6 +19,7 @@ public class WaveSpawner : MonoBehaviour
     private int tankProgression;
     public List<GameObject> enemies = new List<GameObject>();
     public static WaveSpawner Instance;
+    public GameObject parentRef;
 
     public GameObject[] spawnPoint;
 
@@ -40,8 +41,8 @@ public class WaveSpawner : MonoBehaviour
                 spawnInterval = 3;
                 maxRegular = 7;
                 maxTank = 3;
-                tankProgression = 2;
-                regProgression = 3;
+                tankProgression = 1;
+                regProgression = 4;
                 Debug.Log("Medium");
 
                 break;
@@ -51,7 +52,7 @@ public class WaveSpawner : MonoBehaviour
                 maxRegular = 10;
                 maxTank = 4;
                 tankProgression = 3;
-                regProgression = 5;
+                regProgression = 6;
                 Debug.Log("Hard");
 
                 break;
@@ -72,12 +73,13 @@ public class WaveSpawner : MonoBehaviour
             {
                 numRegular++;
                 gameTime += spawnInterval;
-            
-                Instantiate(regEnemy, spawnPoint[(int)Random.Range(0.0f, spawnPoint.Length)].transform.position, Quaternion.identity);
 
-                if(numTanks != maxTank)
+            Instantiate(regEnemy, spawnPoint[(int)Random.Range(0.0f, spawnPoint.Length)].transform.position, Quaternion.identity, parentRef.transform);
+
+            if (numTanks != maxTank)
                 {
-                    Instantiate(tankEnemy, spawnPoint[(int)Random.Range(0.0f, spawnPoint.Length)].transform.position, Quaternion.identity);
+                    Instantiate(tankEnemy, spawnPoint[(int)Random.Range(0.0f, spawnPoint.Length)].transform.position, Quaternion.identity, parentRef.transform);
+                
                     numTanks++;
                 }
         }

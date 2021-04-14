@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GatlingGun : MonoBehaviour
 {
-    float coneSize = 2;
-    float shootForce = 20000;
+    float coneSize = 4;
+    float shootForce = 30000;
     public GameObject bulletPrefab;
     public GameObject firePoint;
     public GameObject fireEffect;

@@ -22,6 +22,8 @@ public class TankEnemy : EnemyBase
     {
         //Debug.Log(target);
         //Constantly check if target has been destroyed => if target had been destroyed => SetDestination(GetTarget())
+        target = GetTarget(this.transform.position);
+        agent.SetDestination(target.transform.position);
         if (!target)
         {
             target = GetTarget(this.transform.position);

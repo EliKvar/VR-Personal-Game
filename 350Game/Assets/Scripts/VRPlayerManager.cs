@@ -7,9 +7,9 @@ public class VRPlayerManager : MonoBehaviour
     public GameObject player;
     public static VRPlayerManager Instance;
 
-    float xPos = 143.134f;
-    float yPos = 158.706f;
-    float zPos = 808.053f;
+    float xPos = 171.678f;
+    float yPos = 223.909f;
+    float zPos = 981.186f;
     float yRot = 181.276f;
     float xScale = 2.4608f;
     float yScale = 2.4608f;

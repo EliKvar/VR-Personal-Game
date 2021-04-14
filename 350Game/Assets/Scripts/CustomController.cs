@@ -51,12 +51,15 @@ public class CustomController : MonoBehaviour
     public SoftJointLimitSpring newSpringTwist;
     public SoftJointLimitSpring newSpringSwing;
     private bool haptic = false;
-
-
-
+    private AudioSource gatlingFireSFX;
+    private bool isFiring = false;
 
     void Start()
     {
+        var audioSources = GetComponents<AudioSource>();
+        gatlingFireSFX = audioSources[0];
+        gatlingFireSFX.Play();
+        gatlingFireSFX.volume = 0.0f;
         myCamera = GetComponentInChildren<Camera>();
         //isSlowed = true;
         isAdded = true;
@@ -71,7 +74,6 @@ public class CustomController : MonoBehaviour
         newSpringTwist = new SoftJointLimitSpring();
         newSpringTwist.spring = 0.0f;
         
-
 
     }
     void Update()
@@ -90,12 +92,16 @@ public class CustomController : MonoBehaviour
         {
             Debug.Log("Dropped");
             gatlingGun.GetComponent<Animator>().Play("baseidlegat");
+            gatlingFireSFX.volume = 0;
+            isFiring = false;
         }
 
         if (lHandle.isGrabbed && rHandle.isGrabbed && OVRInput.Get(OVRInput.Button.One) == false && OVRInput.Get(OVRInput.Button.Three) == false)
         {
             Debug.Log("Grabbed");
             gatlingGun.GetComponent<Animator>().Play("idlegat");
+            gatlingFireSFX.volume = 0;
+            isFiring = false;
             OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.LTouch);
             OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
 
@@ -106,7 +112,8 @@ public class CustomController : MonoBehaviour
              
             Debug.Log("Firing");
             gatlingGun.GetComponent<Animator>().Play("gatling2");
-            GatlingGun.instance.Fire();
+            gatlingFireSFX.volume = 1;
+            isFiring = true;
             //FOLLOW VIDEO FOR OVRHAPTICSCLIPS
             //OVRInput.SetControllerVibration(.3f, 0.5f, OVRInput.Controller.RTouch);
             //OVRInput.SetControllerVibration(.3f, 0.5f, OVRInput.Controller.LTouch);
@@ -128,8 +135,12 @@ public class CustomController : MonoBehaviour
      void FixedUpdate()
     {
 
-     
-        
+     if(isFiring == true)
+        {
+            GatlingGun.instance.Fire();
+
+        }
+
         Vector3 camScreens = new Vector3(0.5f, 0.5f, 0f); // center of the screen
         float rayLengths = 100f;
         Ray rays = myCamera.ViewportPointToRay(camScreens);
